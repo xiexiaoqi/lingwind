@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <title><?php echo $title;?></title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+</head>
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="height:400px"></div>
+    <script type = 'text/javascript' src="<?php echo STATIC_DOMIN;?>script/json2.js"></script>
+    <!-- ECharts单文件引入 -->
+    <script type = 'text/javascript' src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+    <script type = 'text/javascript' type="text/javascript">
+
+        var mm_date = '<?php echo $date;?>';
+        mm_date = mm_date == '' ? '[]' : mm_date;
+        var mm_weight='<?php echo $weight;?>';
+        mm_weight = mm_weight == '' ? '[]' : mm_weight;
+
+        mm_date   = JSON.parse(mm_date);
+        mm_weight = JSON.parse(mm_weight);
+
+        var setLegend = {
+        	weight1: '妈妈体重线'
+        };
+        // 路径配置
+        require.config({
+            paths: {
+                echarts: 'http://echarts.baidu.com/build/dist'
+            }
+        });
+        
+        // 使用
+        require(
+            [
+                'echarts',
+                'echarts/chart/line' // 使用柱状图就加载bar模块，按需加载
+            ],
+            function (ec) {
+                // 基于准备好的dom，初始化echarts图表
+                var myChart = ec.init(document.getElementById('main')); 
+                
+                var option = {
+				    title : {
+				        text: '妈妈我要长大'
+				    },
+				    tooltip : {
+				        trigger: 'axis'
+				    },
+				    legend: {
+				        data:[setLegend.weight1]
+				    },
+				    xAxis : [
+				        {
+				            type : 'category',
+				            boundaryGap : false,
+				            data : mm_date
+				        }
+				    ],
+				    yAxis : [
+				        {
+				            type : 'value',
+				            axisLabel : {
+				                formatter: '{value} kg'
+				            }
+				        }
+				    ],
+				    series : [
+				        {
+				            name:setLegend.weight1,
+				            type:'line',
+				            data:mm_weight,
+				            markLine : {
+				                data : [
+				                    {type : 'average', name: '平均值'}
+				                ]
+				            },
+				            smooth: true
+				        }
+				    ]
+				};
+        
+                // 为echarts对象加载数据 
+                myChart.setOption(option); 
+            }
+        );
+    </script>
+    <script>
+</body>
+</html>

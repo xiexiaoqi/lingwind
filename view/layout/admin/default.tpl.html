@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <style type="text/css">
+     body 
+    {
+    	padding-top: 60px;
+    	padding-bottom: 40px;
+    }
+
+    .sidebar-nav 
+    {
+    	padding: 9px 0;
+    }
+    </style>
+    <link href="static/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo STATIC_DOMIN;?>css/style.css" type="text/css" >
+    <link rel="stylesheet" href="<?php echo STATIC_DOMIN;?>css/layout.css" type="text/css" >
+    <link rel="stylesheet" href="<?php echo STATIC_DOMIN;?>css/datepicker.css" type="text/css" />
+    <!--[if lt IE 9]>
+      <script src="static/script/html5.js"></script>
+    <![endif]-->
+    <!--[if IE 6]>    
+        		<link href="static/css/ie6.min.css" rel="stylesheet">
+    <![endif]-->
+    <title>管理后台</title>
+</head>
+<body>
+
+    <form method = 'post' action = '/index.php?c=admin&a=addWeight' name = 'set_weight' id = 'set_weight'>
+        <label for='role'>我是</label>
+        <select name = 'role' id = 'role'>
+        	<option value = 'mm' selected="selected">妈咪</option>
+        	<option value = 'bb'>爸鼻</option>
+        </select>
+        <label for='weight' class = 'lb_weight'>妈咪的体重</label>
+        <input type = 'text' name = 'weight' id = 'weight' value="" />
+        <label for='inputDate' class = 'lb_date'>妈咪，请选择日期</label>
+    	<input type = 'text' name = 'date' class = 'inputDate' id="inputDate" value="<?php echo $time?>" />
+    	<br />
+    	<input type = 'submit' class="btn btn-default" value="我填好了" />
+    </form>
+
+    <a href="/index.php?c=missleeispig">我去看看</a>
+
+    <script src="<?php echo STATIC_DOMIN;?>script/bootstrap.min.js"></script>
+    <!--[if IE 6]>    
+    		 <script src="<?php echo STATIC_DOMIN;?>script/ie6.min.js"></script>
+	<![endif]-->
+    <script type="text/javascript" src="<?php echo STATIC_DOMIN;?>script/jquery.js"></script>
+	<script type="text/javascript" src="<?php echo STATIC_DOMIN;?>script/datepicker.js"></script>
+    <script type="text/javascript">
+        $(function(){
+
+        	var role = {'mm':'妈咪', 'bb':'爸鼻'};
+        	$("#role").change(function(){
+        		var r_val = $(this).val();
+        		if(role[r_val] == undefined) {
+        			alert('error');
+        			return false;
+        		}
+        		$('.lb_weight').text(role[r_val]+'的体重');
+        		$('.lb_date').text(role[r_val]+'，请选择日期');
+        	});
+        	$('.inputDate').DatePicker({
+				format:'m/d/Y',
+				date: $('#inputDate').val(),
+				current: $('#inputDate').val(),
+				starts: 1,
+				position: 'right',
+				onBeforeShow: function(){
+					$('#inputDate').DatePickerSetDate($('#inputDate').val(), true);
+				},
+				onChange: function(formated, dates){
+					$('#inputDate').val(formated);
+					//选择完后关闭控件
+					$('#inputDate').DatePickerHide();
+				}
+			});
+        })
+    </script>
+    <script>
+</body>
+</html>
