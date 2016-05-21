@@ -4,3 +4,4 @@
 
 # php config
 config/db.config.php
+lib/COS_SDK/Qcloud_cos/Conf.php
