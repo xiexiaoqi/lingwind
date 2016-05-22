@@ -1,4 +1,15 @@
-<hr/>
 <footer>
-powered by LazyPHP. 2008~<?=date("Y")?>
+powered by xiaoqi.xie . 2008~<?=date("Y")?>
 </footer>
+
+<script src="http://lib.sinaapp.com/js/jquery/1.8/jquery.min.js"></script>
+<script src="http://lib.sinaapp.com/js/bootstrap/2.1.1/js/bootstrap.min.js"></script>
+<!--[if IE 6]>    
+		 <script src="static/script/ie6.min.js"></script>
+  <![endif]-->
+<script src="static/script/app.js"></script>
+<?php if( isset($js) && is_array( $js ) ): ?>
+	<?php foreach( $js as $jfile ): ?>
+		<script type="text/javascript" src="static/script/<?=$jfile;?>" ></script>
+	<?php endforeach; ?>
+<?php endif; ?>

@@ -250,3 +250,13 @@
         echo $response;
         exit();
     }
+
+    /**
+     * 上传文件
+     * @param $bucketName string 云存储定义的容器名
+     * @param $filePath array 上传文件 
+     * 先将文件保存到本地，然后再上传到云存储
+     */
+    function uploadFile($bucketName, $filePath) {
+
+    }

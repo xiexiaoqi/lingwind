@@ -5,9 +5,18 @@ include_once( AROOT . 'controller'.DS.'app.class.php' );
 class adminController extends appController
 {
 	private $_role_map = [
-	    'mm' => 2,
-	    'bb' => 1
+	    'dad' => 1,
+	    'mom' => 2,
+	    'mm'  => 3
+	    
 	];
+
+	private $_file_types = [
+        'pic' => ['.jpg', '.png', '.jpeg', '.gif'],
+        'voice' => ['.mp3', '.wav', '.raw'],
+        'video' => ['.mp4', '.avi']
+	];
+
 	private $_layout = 'admin';
 	function __construct()
 	{
@@ -22,6 +31,23 @@ class adminController extends appController
 	}
 
 	function addWeight() {
+
+		var_dump($_POST);
+
+		if(!empty($_FILES) && !empty($_FILES['file']) && $_FILES['file']['error'] == 0) {
+			//分析图片后缀，判断格式
+			$fileName = $_FILES['file']['name'];
+			$flagIndex= strripos($fileName, '.');
+			$suffix = substr($fileName, $flagIndex);
+			foreach ($this->_file_types as $file_type => $types) {
+				if(in_array($suffix, $types)) {
+					break;
+				}
+			}
+			var_dump($file_type);
+		}
+		var_dump($_FILES);
+		exit();
 		$role = v('role');
 		$weight = floatval(v('weight'));
 		$date   = v('date');

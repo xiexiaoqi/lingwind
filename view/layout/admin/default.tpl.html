@@ -31,21 +31,28 @@
 </head>
 <body>
 
-    <form method = 'post' action = '/index.php?c=admin&a=addWeight' name = 'set_weight' id = 'set_weight'>
+    <form method = 'post' action = '/index.php?c=admin&a=addWeight' name = 'set_weight' id = 'set_weight' enctype="multipart/form-data">
         <label for='role'>我是</label>
         <select name = 'role' id = 'role'>
-        	<option value = 'mm' selected="selected">妈咪</option>
-        	<option value = 'bb'>爸鼻</option>
+        	<option value = 'mom' selected="selected">妈咪</option>
+        	<option value = 'dad'>爸比</option>
+            <option value = 'mm'>慕慕</option>
         </select>
         <label for='weight' class = 'lb_weight'>妈咪的体重</label>
         <input type = 'text' name = 'weight' id = 'weight' value="" />
         <label for='inputDate' class = 'lb_date'>妈咪，请选择日期</label>
     	<input type = 'text' name = 'date' class = 'inputDate' id="inputDate" value="<?php echo $time?>" />
-    	<br />
+    	<label for = 'file'>多媒体文件</label>
+        <input type = 'file' name = 'file' id = 'file' value = '' />
+        <br />
+        <br />
+        <label for = 'desc'>加些文字</label>
+        <textarea name = 'desc' id = 'desc'></textarea>
+        <br />
+        <br />
     	<input type = 'submit' class="btn btn-default" value="我填好了" />
+        <a href="/index.php?c=missleeispig">我去看看</a>
     </form>
-
-    <a href="/index.php?c=missleeispig">我去看看</a>
 
     <script src="<?php echo STATIC_DOMIN;?>script/bootstrap.min.js"></script>
     <!--[if IE 6]>    
@@ -56,7 +63,7 @@
     <script type="text/javascript">
         $(function(){
 
-        	var role = {'mm':'妈咪', 'bb':'爸鼻'};
+        	var role = {'mom':'妈咪', 'dad':'爸比', 'mm': '慕慕'};
         	$("#role").change(function(){
         		var r_val = $(this).val();
         		if(role[r_val] == undefined) {

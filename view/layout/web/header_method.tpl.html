@@ -1,0 +1,16 @@
+<title><?=$top_title . ' | ' . c('site_name') ?></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="http://lib.sinaapp.com/js/bootstrap/2.1.1/css/bootstrap.min.css" rel="stylesheet">
+	  <link href="http://lib.sinaapp.com/js/bootstrap/2.1.1/css/bootstrap-responsive.min.css" rel="stylesheet">
+	  <link rel="stylesheet" href="static/css/style.css" type="text/css" >
+<?php if( isset($css) && is_array( $css ) ): ?>
+        <?php foreach( $css as $cfile ): ?><link rel="stylesheet" type="text/css" href="static/css/<?=$cfile?>">
+        <?php endforeach; ?>
+<?php endif; ?>
+
+<!--[if lt IE 9]>
+      <script src="static/script/html5.js"></script>
+<![endif]-->
+<!--[if IE 6]>    
+    		<link href="static/css/ie6.min.css" rel="stylesheet">
+<![endif]-->
